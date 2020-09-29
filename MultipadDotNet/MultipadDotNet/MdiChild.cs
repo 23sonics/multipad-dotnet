@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MultipadDotNet
@@ -25,19 +19,17 @@ namespace MultipadDotNet
         {
             if (TextInput.Modified)
             {
-                DialogResult saveMsg = MessageBox.Show(System.IO.Path.GetFileName(openedFilePath) + " has been changed. Save file before closing?", "Multipad .NET", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-                if (saveMsg == DialogResult.Yes)
-                {
-                    MainForm frm = new MainForm();
-                    frm.SaveFile2();
-                }
-                else if (saveMsg == DialogResult.No)
-                {
-                    return;
-                }
-                else if (saveMsg == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
+                switch (MessageBox.Show(System.IO.Path.GetFileName(openedFilePath) + " has been changed. Save file before closing?", "Multipad .NET", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information))
+                { 
+                    case DialogResult.Yes:
+                        MainForm frm = new MainForm();
+                        frm.SaveFile2();
+                        return;
+                    case DialogResult.No:
+                        return;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        return;
                 }
             }
         }
@@ -45,12 +37,22 @@ namespace MultipadDotNet
         private void TextInput_TextChanged(object sender, EventArgs e)
         {
             if (this.TextInput.Modified)
-            { this.Text = System.IO.Path.GetFileName(openedFilePath) + "*"; }
-            else { return; }
+            {
+                this.Text = System.IO.Path.GetFileName(openedFilePath) + "*";
+            }
+            else
+            {
+                return;
+            }
 
             if (TextInput.CanUndo)
-            { ((MainForm)this.MdiParent).EditUndo.Enabled = true; }
-            else { ((MainForm)this.MdiParent).EditUndo.Enabled = false; }
+            {
+                ((MainForm)this.MdiParent).EditUndo.Enabled = true;
+            }
+            else
+            {
+                ((MainForm)this.MdiParent).EditUndo.Enabled = false;
+            }
         }
     }
 }

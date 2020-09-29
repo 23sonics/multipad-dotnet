@@ -14,7 +14,6 @@ C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotN
 C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotNet\obj\Debug\MultipadDotNet.Properties.Resources.resources
 C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotNet\obj\Debug\MultipadDotNet.csproj.GenerateResource.cache
 C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotNet\obj\Debug\MultipadDotNet.csproj.CoreCompileInputs.cache
-C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotNet\bin\Debug\MultipadDotNet.exe
 C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotNet\bin\Debug\FindReplace.dll
 C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotNet\obj\Debug\MultipadDotNet.csproj.CopyComplete
 C:\Users\cstoc\Documents\caionly\git\multipad-dotnet\MultipadDotNet\MultipadDotNet\bin\Debug\multipad.exe.config

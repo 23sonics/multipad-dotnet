@@ -31,17 +31,15 @@ namespace MultipadDotNet
                     }
                     else
                     {
-                        DialogResult dresult = MessageBox.Show("Cannot find the " + newMdiChild.openedFilePath + " file." + (char)10 + "Do you want to create a new file?", "Multipad .NET", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                        if (dresult == DialogResult.Yes)
+                        switch (MessageBox.Show("Cannot find the " + newMdiChild.openedFilePath + " file." + (char)10 + "Do you want to create a new file?", "Multipad .NET", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
                         {
-                            File.CreateText(newMdiChild.openedFilePath);
-                            newMdiChild.Text = Path.GetFileName(newMdiChild.openedFilePath);
-                            newMdiChild.TextInput.Text = File.ReadAllText(newMdiChild.openedFilePath);
-                            return;
-                        }
-                        else if (dresult == DialogResult.No)
-                        {
-                            return;
+                            case DialogResult.Yes:
+                                File.CreateText(newMdiChild.openedFilePath);
+                                newMdiChild.Text = Path.GetFileName(newMdiChild.openedFilePath);
+                                newMdiChild.TextInput.Text = File.ReadAllText(newMdiChild.openedFilePath);
+                                return;
+                            case DialogResult.No:
+                                return;
                         }
                     }
                 }
@@ -52,8 +50,7 @@ namespace MultipadDotNet
 
         private void FileAbout_Click(object sender, EventArgs e)
         {
-            AboutBox about = new AboutBox();
-            about.ShowDialog();
+            new AboutBox().ShowDialog();
         }
 
         private void FileExit_Click(object sender, System.EventArgs e)
@@ -64,7 +61,7 @@ namespace MultipadDotNet
         private void FileSave_Click(object sender, System.EventArgs e)
         {
             MdiChild thisMdiChild = (ActiveMdiChild as MdiChild);
-            if (!(thisMdiChild.openedFilePath == "Untitled"))
+            if (thisMdiChild.openedFilePath != "Untitled")
             {
                 string safeName = Path.GetFileName(thisMdiChild.openedFilePath);
                 using (StreamWriter writer = new StreamWriter(thisMdiChild.openedFilePath))
@@ -181,16 +178,27 @@ namespace MultipadDotNet
 
             // Look at the Find dialog and, if the Find what
             // box is empty, disable Find Next (Search menu)
-            if (findDialog.FindWhat == string.Empty) { SearchNext.Enabled = false; }
-            else { SearchNext.Enabled = true; }
+            if (findDialog.FindWhat == string.Empty)
+            {
+                SearchNext.Enabled = false;
+            }
+            else
+            {
+                SearchNext.Enabled = true;
+            }
 
             if (ActiveMdiChild != null)
             {
                 MenuOptionEnable(true);
                 ToggleWordWrap(0);
                 if ((ActiveMdiChild as MdiChild).TextInput.CanUndo)
-                { EditUndo.Enabled = true; }
-                else { EditUndo.Enabled = false; }
+                {
+                    EditUndo.Enabled = true;
+                }
+                else
+                {
+                    EditUndo.Enabled = false;
+                }
             }
             else
             {
@@ -295,7 +303,7 @@ namespace MultipadDotNet
 
         private void findDialog_SearchFailed(FindReplace.FindReplaceEventArgs eventArguments)
         {
-            MessageBox.Show("Could not find any occurrences of \"" + eventArguments.FindWhat + "\".");
+            MessageBox.Show($"Could not find any occurrences of \"{eventArguments.FindWhat}\".");
         }
 
         private void SearchNext_Click(object sender, System.EventArgs e)
